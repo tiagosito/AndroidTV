@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       },
       child: MaterialApp(
         title: 'Flutter Android TV',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -80,38 +81,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildCard(Movie movie) {
     return InkWell(
-        focusColor: Colors.white,
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => VideoPlayer(
-                        url: movie.url,
-                      )));
-        },
-        child: SizedBox(
-            height: 200,
-            width: 200,
-            child: Card(
-                color: Colors.black12,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: Image.network(
-                      movie.image,
-                      fit: BoxFit.cover,
-                    )),
-                    const Divider(
-                      color: Colors.white,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(movie.title, style: const TextStyle(color: Colors.white)),
-                    ),
-                  ],
-                ))));
+      focusColor: Colors.white,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VideoPlayer(
+              url: movie.url,
+            ),
+          ),
+        );
+      },
+      child: SizedBox(
+        height: 200,
+        width: 200,
+        child: Card(
+          color: Colors.black12,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Image.network(
+                  movie.image,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const Divider(
+                color: Colors.white,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(movie.title, style: const TextStyle(color: Colors.white)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    addMovies();
+    super.initState();
   }
 
   @override

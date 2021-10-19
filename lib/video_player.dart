@@ -17,6 +17,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
   late YoutubeMetaData _videoMetaData;
   bool _isPlayerReady = false;
   late String videoId;
+  bool _showCloseButton = false;
   @override
   void initState() {
     super.initState();
@@ -39,6 +40,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
         _videoMetaData = _controller.metadata;
       });
     }
+    _showCloseButton = _controller.value.isControlsVisible;
   }
 
   @override
@@ -75,7 +77,33 @@ class _VideoPlayerState extends State<VideoPlayer> {
           },
           onEnded: (data) {}),
       builder: (context, player) => Scaffold(
-        body: player,
+        body: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              color: Colors.red,
+              child: player,
+            ),
+            _showCloseButton
+                ? SafeArea(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Icon(
+                          Icons.close,
+                          size: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
+          ],
+        ),
       ),
     );
   }
