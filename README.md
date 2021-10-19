@@ -1,6 +1,6 @@
-# androidtv
+# Android Tv
 
-A new Flutter project.
+A Flutter project to use Android TV.
 
 ## Getting Started
 
