@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
         LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),
       },
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Flutter Android TV',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: const MyHomePage(title: 'Flutter Android TV'),
       ),
     );
   }
